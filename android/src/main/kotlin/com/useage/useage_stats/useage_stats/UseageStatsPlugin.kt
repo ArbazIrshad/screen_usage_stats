@@ -2,11 +2,13 @@ package com.useage.useage_stats.useage_stats
 
 
 import android.app.Activity
+import android.app.AppOpsManager
 import android.app.usage.UsageStats
 import android.app.usage.UsageStatsManager
 import android.content.Context
 import android.content.pm.PackageManager
 import android.content.Intent
+import android.content.pm.ApplicationInfo
 import android.provider.Settings
 import android.util.Log
 
@@ -68,6 +70,7 @@ class UseageStatsPlugin :
 //            result.notImplemented()
 //        }
         when(call.method) {
+            "checkPermission" -> hasUsageAccessPermission(result)
             "getPlatformVersion" ->   result.success("Android ${android.os.Build.VERSION.RELEASE}")
             "openAppusageSettings" -> openAppUsageSetting(result)
             "getUpdatedUsageStatsToday" -> getUpdatedUsageStatsToday(result)
@@ -108,6 +111,26 @@ class UseageStatsPlugin :
         }
 
 
+    }
+
+
+    fun hasUsageAccessPermission(result: Result) {
+        try {
+            val appOpsManager = context.getSystemService(Context.APP_OPS_SERVICE) as AppOpsManager
+            val applicationInfo: ApplicationInfo =
+                context.packageManager.getApplicationInfo(context.packageName, 0)
+            val mode = appOpsManager.checkOpNoThrow(
+                AppOpsManager.OPSTR_GET_USAGE_STATS,
+                applicationInfo.uid,
+                context.packageName
+            )
+
+            Log.d("hasAccessPermission", "HAS PERRMISSON $mode")
+            result.success(mode == AppOpsManager.MODE_ALLOWED)
+        } catch(e: Exception){
+            Log.d("hasAccessPermission", "ERROR HAS OCCURRED $e")
+            result.error("PERMISSION_DENIED", "Required permission not granted", null)
+        }
     }
 
 

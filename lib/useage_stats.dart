@@ -14,4 +14,8 @@ class UseageStats {
   Future<List<AppUsageInfo>> getUsageStatsForToday() {
     return UseageStatsPlatform.instance.getUsageStatsForToday();
   }
+
+  Future<bool?> hasPermission() {
+    return UseageStatsPlatform.instance.hasPermission();
+  }
 }

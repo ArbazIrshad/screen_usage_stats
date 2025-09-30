@@ -39,4 +39,8 @@ abstract class UseageStatsPlatform extends PlatformInterface {
       'getUseageStatsForToday() has not been implemented.',
     );
   }
+
+  Future<bool?> hasPermission() async {
+    throw UnimplementedError('hasPermission() has not been implemented.');
+  }
 }

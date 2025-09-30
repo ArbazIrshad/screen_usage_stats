@@ -39,6 +39,11 @@ class MethodChannelUseageStats extends UseageStatsPlatform {
 
     return apps;
   }
+
+  @override
+  Future<bool?> hasPermission() async {
+    return methodChannel.invokeMethod<bool>('checkPermission');
+  }
 }
 
 // final result = {

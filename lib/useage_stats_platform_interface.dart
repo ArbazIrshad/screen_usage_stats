@@ -39,4 +39,8 @@ abstract class UseageStatsPlatform extends PlatformInterface {
       'getUseageStatsForToday() has not been implemented.',
     );
   }
+
+  Future<void> startMonitoring() async {
+    throw UnimplementedError('startMonitoring() has not been implemented.');
+  }
 }

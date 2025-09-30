@@ -39,6 +39,13 @@ class MethodChannelUseageStats extends UseageStatsPlatform {
 
     return apps;
   }
+
+  @override
+  Future<void> startMonitoring() async {
+    final res = await methodChannel.invokeMethod<String>('startMonitoring');
+    print('Start Monitoring Result: $res');
+    return;
+  }
 }
 
 // final result = {

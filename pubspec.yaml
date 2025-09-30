@@ -44,6 +44,8 @@ flutter:
       android:
         package: com.useage.useage_stats.useage_stats
         pluginClass: UseageStatsPlugin
+      ios:
+        pluginClass: UseageStatsPlugin
 
   # To add assets to your plugin package, add an assets section, like this:
   # assets:

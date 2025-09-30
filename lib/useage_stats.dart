@@ -14,4 +14,10 @@ class UseageStats {
   Future<List<AppUsageInfo>> getUsageStatsForToday() {
     return UseageStatsPlatform.instance.getUsageStatsForToday();
   }
+
+  Future<void> startMonitoring() {
+    return UseageStatsPlatform.instance.startMonitoring();
+  }
+
+  Future<void> getAppUseage() {}
 }

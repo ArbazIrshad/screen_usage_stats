@@ -69,7 +69,8 @@ class _MyAppState extends State<MyApp> {
             // Center(child: Text('Running on: $_platformVersion\n')),
             ElevatedButton(
               onPressed: () {
-                _useageStatsPlugin.openAppUsagePermission();
+                print('Opening App Usage Permission Settings');
+                _useageStatsPlugin.startMonitoring();
               },
               child: const Text('Open App Usage Permission'),
             ),

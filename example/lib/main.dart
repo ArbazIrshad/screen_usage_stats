@@ -73,6 +73,20 @@ class _MyAppState extends State<MyApp> {
               },
               child: const Text('Open App Usage Permission'),
             ),
+
+            FutureBuilder(
+              future: _useageStatsPlugin.hasPermission(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const CircularProgressIndicator();
+                } else if (snapshot.hasError) {
+                  return Text('Error: ${snapshot.error}');
+                } else {
+                  final hasPermission = snapshot.data ?? false;
+                  return Text('Has Permission: $hasPermission');
+                }
+              },
+            ),
             Expanded(
               child: ListView(
                 children: [for (final app in apps) AppInfoWidget(app: app)],
